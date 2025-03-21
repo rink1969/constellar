@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Buffer } from 'buffer';
 import Npc from './npc.svg';
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
@@ -79,13 +80,95 @@ function App() {
   }
 
   function Home() {
-    const bubbles = [
-      { src: 'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/whitepaper.png', alt: 'Bubble 1' },
-      { src: 'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/whitepaper.png', alt: 'Bubble 2' },
-      { src: 'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/whitepaper.png', alt: 'Bubble 3' },
-      { src: 'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/whitepaper.png', alt: 'Bubble 4' },
-      { src: 'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/whitepaper.png', alt: 'Bubble 5' },
-    ];
+    const [zizaiBubbles, setZizaiBubbles] = useState<Bubble[]>([]);
+
+    useEffect(() => {
+      const fetchBubbles = async () => {
+        try {
+          const response = await fetch('https://testnet-api.explorer.nervos.org/api/v2/nft/collections/0xdb9fc0b43b99850a0182ce8a31e5142fa6c4074febee8eab074521ecfffefdc3/items?page=1');
+          const data = await response.json();
+          //console.log(data.data);
+          const tmpBubbles = [];
+          for (const item of data.data) {
+            //console.log(item.cell.data);
+            const content = item.cell.data;
+            const decodedContent = Buffer.from(content.slice(2), 'hex').toString('utf-8');
+            const regex = /https:\/\/raw\.githubusercontent\.com\/rink1969\/constellar\/refs\/heads\/main\/dob\/assets\/(.*?)"/g;
+            let match;
+            while ((match = regex.exec(decodedContent)) !== null) {
+              const cleanedMatch = match[0].endsWith('"') ? match[0].slice(0, -1) : match[0];
+              console.log(cleanedMatch);
+              tmpBubbles.push({ src: cleanedMatch, alt: 'Bubble' });
+            }
+          }
+          setZizaiBubbles(tmpBubbles);
+        } catch (error) {
+          console.error('Error fetching zizai bubbles:', error);
+        }
+      };
+
+      fetchBubbles();
+    }, []);
+
+    const [xiaoyaoBubbles, setXiaoyaoBubbles] = useState<Bubble[]>([]);
+
+    useEffect(() => {
+      const fetchBubbles = async () => {
+        try {
+          const response = await fetch('https://testnet-api.explorer.nervos.org/api/v2/nft/collections/0xce9dde6605d9d39166b2c2583bc93ee6a4d6410233dccb2ff33a270687e801cc/items?page=1');
+          const data = await response.json();
+          //console.log(data.data);
+          const tmpBubbles = [];
+          for (const item of data.data) {
+            //console.log(item.cell.data);
+            const content = item.cell.data;
+            const decodedContent = Buffer.from(content.slice(2), 'hex').toString('utf-8');
+            const regex = /https:\/\/raw\.githubusercontent\.com\/rink1969\/constellar\/refs\/heads\/main\/dob\/assets\/(.*?)"/g;
+            let match;
+            while ((match = regex.exec(decodedContent)) !== null) {
+              const cleanedMatch = match[0].endsWith('"') ? match[0].slice(0, -1) : match[0];
+              console.log(cleanedMatch);
+              tmpBubbles.push({ src: cleanedMatch, alt: 'Bubble' });
+            }
+          }
+          setXiaoyaoBubbles(tmpBubbles);
+        } catch (error) {
+          console.error('Error fetching xiaoyao bubbles:', error);
+        }
+      };
+
+      fetchBubbles();
+    }, []);
+
+    const [yongxianBubbles, setYongxianBubbles] = useState<Bubble[]>([]);
+
+    useEffect(() => {
+      const fetchBubbles = async () => {
+        try {
+          const response = await fetch('https://testnet-api.explorer.nervos.org/api/v2/nft/collections/0x2c2c0c813714d0b2a8fa10cdc0aecf939577dbb5fa051e40eb24963582ba390e/items?page=1');
+          const data = await response.json();
+          //console.log(data.data);
+          const tmpBubbles = [];
+          for (const item of data.data) {
+            //console.log(item.cell.data);
+            const content = item.cell.data;
+            const decodedContent = Buffer.from(content.slice(2), 'hex').toString('utf-8');
+            const regex = /https:\/\/raw\.githubusercontent\.com\/rink1969\/constellar\/refs\/heads\/main\/dob\/assets\/(.*?)"/g;
+            let match;
+            while ((match = regex.exec(decodedContent)) !== null) {
+              const cleanedMatch = match[0].endsWith('"') ? match[0].slice(0, -1) : match[0];
+              console.log(cleanedMatch);
+              tmpBubbles.push({ src: cleanedMatch, alt: 'Bubble' });
+            }
+          }
+          setYongxianBubbles(tmpBubbles);
+        } catch (error) {
+          console.error('Error fetching xiaoyao bubbles:', error);
+        }
+      };
+
+      fetchBubbles();
+    }, []);
 
     const imageSrc = [
       'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/zizai.jpg',
@@ -115,6 +198,8 @@ function App() {
       navigate('/bubble-view', { state: { bubble } });
     };
 
+    const bubbles = [zizaiBubbles, xiaoyaoBubbles, yongxianBubbles];
+
     return (
       <div style={{ textAlign: 'center', padding: '20px', position: 'relative', backgroundColor: '#f0f8ff' }}>
         <h1 style={{ marginBottom: '40px', color: '#333' }}>SeeDAO</h1>
@@ -132,9 +217,9 @@ function App() {
                 }}
               />
               <p style={{ textAlign: 'center', marginTop: '10px', color: '#555', fontWeight: 'bold', fontSize: '18px' }}>{imageTitle[index]}</p>
-              {bubbles.map((bubble, bubbleIndex) => {
+              {bubbles[index].map((bubble, bubbleIndex) => {
                 const bubbleSize = currentUser === 'guest' ? 50 : Math.random() * 50 + 30;
-                const angle = (360 / bubbles.length) * bubbleIndex;
+                const angle = (360 / bubbles[index].length) * bubbleIndex;
                 const radius = 200;
                 const x = radius * Math.cos((angle * Math.PI) / 180);
                 const y = radius * Math.sin((angle * Math.PI) / 180);
@@ -227,7 +312,7 @@ function App() {
         }}
           />
         </div>
-        <p style={{ textAlign: 'center', marginTop: '20px', color: '#555', fontWeight: 'bold', fontSize: '18px' }}>您与社区的匹配度为: {similar[user]}</p>
+        <p style={{ textAlign: 'center', marginTop: '20px', color: '#555', fontWeight: 'bold', fontSize: '18px' }}>您与社区的相似度为: {similar[user]}</p>
       </div>
     );
   }
