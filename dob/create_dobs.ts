@@ -12,19 +12,34 @@ function getExplorerTxUrl(txHash: string) {
  * create spore
  */
 
-const imageBaseUrl = "https://raw.githubusercontent.com/CKBFansDAO/rock-web5-demo/refs/heads/main/assets";
+const imageBaseUrl = "https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/";
 
-const clusterIds: string[] = ["0xa", "0xb", "0xc"];
+const clusterIds: string[] = ["0x4b16ee11e6f8cab210f59bf4322f665833d1965ed4bd0925201d775b96c0d9b1",
+    "0x17e8047c1f868dbe991d533c0f8f4666143b68ba49a5485bcca624cbb353cb2b",
+    "0x995fcad485a13919748c049ed5431063ecc8549e355db6d5189e811b1ed92b5a"];
 
 const dobs = [
     /* dobs in cluster0 */
     [
-        `{"name":"Nan Tang","resource":{"url":"${imageBaseUrl}/god0/xxx.png","type":"image/png"}}`,
-        `{"name":"Nan Tang","resource":{"url":"${imageBaseUrl}/god1/xxx.png","type":"image/png"}}`,
-        `{"name":"Nan Tang","resource":{"url":"${imageBaseUrl}/god2/xxx.png","type":"image/png"}}`,
+        `{"name":"zizai in SeeDAO post 0","resource":{"url":"${imageBaseUrl}/whitepaper.png","type":"image/png"}}`,
+        `{"name":"zizai in SeeDAO post 1","resource":{"url":"${imageBaseUrl}/whitepaper.png","type":"image/png"}}`,
+        `{"name":"zizai in SeeDAO post 2","resource":{"url":"${imageBaseUrl}/whitepaper.png","type":"image/png"}}`,
     ],
-    [],
-    []
+    /* dobs in cluster1 */
+    [
+        `{"name":"xiaoyao in SeeDAO post 0","resource":{"url":"${imageBaseUrl}/whitepaper.png","type":"image/png"}}`,
+        `{"name":"xiaoyao in SeeDAO post 1","resource":{"url":"${imageBaseUrl}/whitepaper.png","type":"image/png"}}`,
+        `{"name":"xiaoyao in SeeDAO post 2","resource":{"url":"${imageBaseUrl}/whitepaper.png","type":"image/png"}}`,
+        `{"name":"xiaoyao in SeeDAO post 3","resource":{"url":"${imageBaseUrl}/whitepaper.png","type":"image/png"}}`,
+        `{"name":"xiaoyao in SeeDAO post 4","resource":{"url":"${imageBaseUrl}/whitepaper.png","type":"image/png"}}`,
+    ],
+    /* dobs in cluster2 */
+    [
+        `{"name":"yongxian in SeeDAO post 0","resource":{"url":"${imageBaseUrl}/whitepaper.png","type":"image/png"}}`,
+        `{"name":"yongxian in SeeDAO post 1","resource":{"url":"${imageBaseUrl}/whitepaper.png","type":"image/png"}}`,
+        `{"name":"yongxian in SeeDAO post 2","resource":{"url":"${imageBaseUrl}/whitepaper.png","type":"image/png"}}`,
+        `{"name":"yongxian in SeeDAO post 3","resource":{"url":"${imageBaseUrl}/whitepaper.png","type":"image/png"}}`,
+    ]
 ];
 
 for (let i = 0; i < clusterIds.length; i++) {
