@@ -8,8 +8,8 @@ function getExplorerTxUrl(txHash: string) {
     return `${baseUrl}/transaction/${txHash}`
 }
 
-const clusterNames = ["god0", "god1", "god2"];
-const clusterDescriptions = ["god0 of nantang DAO.", "god1 of nantang DAO.", "god2 of nantang DAO."];
+const clusterNames = ["zizai", "xiaoyao", "yongxian"];
+const clusterDescriptions = ["zizai in SeeDAO.", "xiaoyao in SeeDAO.", "yongxian in SeeDAO."];
 const clusterIds: string[] = [];
   
 for (const clusterName of clusterNames) {
