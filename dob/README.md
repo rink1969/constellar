@@ -27,6 +27,15 @@ create clusters
 "Cluster IDs:" ["0x4b16ee11e6f8cab210f59bf4322f665833d1965ed4bd0925201d775b96c0d9b1","0x17e8047c1f868dbe991d533c0f8f4666143b68ba49a5485bcca624cbb353cb2b","0x995fcad485a13919748c049ed5431063ecc8549e355db6d5189e811b1ed92b5a"]
 ```
 
+nft collections url:
+
+zizai     https://testnet.explorer.nervos.org/nft-collections/0xdb9fc0b43b99850a0182ce8a31e5142fa6c4074febee8eab074521ecfffefdc3
+
+xiaoyao   https://testnet.explorer.nervos.org/nft-collections/0xce9dde6605d9d39166b2c2583bc93ee6a4d6410233dccb2ff33a270687e801cc
+
+yongxian  https://testnet.explorer.nervos.org/nft-collections/0x2c2c0c813714d0b2a8fa10cdc0aecf939577dbb5fa051e40eb24963582ba390e
+
+
 mint dobs
 
 ```
