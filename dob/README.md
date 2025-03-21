@@ -64,3 +64,10 @@ mint dobs
 "Mint DOB tx sent:" "0x32cbcff818736e1f9c0186d4091031bf810b2e55a279af4e7f71ae302667bef4" "Spore ID: 0x205e780e437403da1f9943589c946c886579ace40aebdf5f80354857a1792225"
 "Mint DOB tx committed:"https://testnet.explorer.nervos.org/transaction/0x32cbcff818736e1f9c0186d4091031bf810b2e55a279af4e7f71ae302667bef4 "Spore ID: 0x205e780e437403da1f9943589c946c886579ace40aebdf5f80354857a1792225"
 ```
+
+append dob
+
+```
+"Mint DOB tx sent:" "0xdaf4d1a541b1442244cfba6a74d29dbffd6ffedc7b9fe961ace0bdd8de99075f" "Spore ID: 0x8ae375e24772ae1bd4438d1345a21e6c5c471cfb37f7a9784638ea043b4c5a6e"
+"Mint DOB tx committed:"https://testnet.explorer.nervos.org/transaction/0xdaf4d1a541b1442244cfba6a74d29dbffd6ffedc7b9fe961ace0bdd8de99075f "Spore ID: 0x8ae375e24772ae1bd4438d1345a21e6c5c471cfb37f7a9784638ea043b4c5a6e"
+```
