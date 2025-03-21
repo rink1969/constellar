@@ -4,6 +4,7 @@ import Npc from './npc.svg';
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import Countdown from 'react-countdown';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -25,7 +26,7 @@ function App() {
         alert('Login successful');
         setIsAuthenticated(true);
         setCurrentUser(username);
-        navigate('/home'); // 登录成功后跳转到 /home
+        navigate('/countdown'); // 登录成功后跳转到 /countdown
       } else {
         alert('Invalid username or password');
       }
@@ -75,6 +76,25 @@ function App() {
             Login
             </button>
         </div>   
+      </div>
+    );
+  }
+
+  function CountdownPage() {
+    const navigate = useNavigate();
+
+    const handleCountdownComplete = () => {
+      navigate('/home'); // 倒计时结束后跳转到 Home 页面
+    };
+
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column', backgroundColor: '#f0f8ff' }}>
+        <h1 style={{ color: '#333', marginBottom: '20px' }}>平静自己的内心</h1>
+        <Countdown
+          date={Date.now() + 5000} // 5秒倒计时
+          onComplete={handleCountdownComplete}
+          renderer={({ seconds }) => <h2 style={{ color: '#555' }}>{seconds} 秒后进入系统...</h2>}
+        />
       </div>
     );
   }
@@ -364,6 +384,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/countdown" element={isAuthenticated ? <CountdownPage /> : <Navigate to="/login" />} />
         <Route
           path="/home"
           element={isAuthenticated ? <Home /> : <Navigate to="/login" />}
