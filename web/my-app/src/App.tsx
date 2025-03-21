@@ -1,4 +1,5 @@
 import React from 'react';
+import Npc from './npc.svg';
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
@@ -15,6 +16,10 @@ function App() {
     
 
     const handleLogin = () => {
+      if (username !== 'guest' && username !== 'user') {
+        alert('Invalid username: guest or user only');
+        return;
+      }
       if (username === password) {
         alert('Login successful');
         setIsAuthenticated(true);
@@ -28,7 +33,8 @@ function App() {
     return (
       <div>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column', backgroundColor: '#f0f8ff' }}>
-          <h2 style={{ marginBottom: '20px', color: '#333' }}>Login Page</h2>
+          <img src={Npc} alt="Npc" style={{ width: '200px', height: 'auto', marginBottom: '20px' }} />
+          <h2 style={{ marginBottom: '20px', color: '#333' }}>Login</h2>
           <div style={{ marginBottom: '10px' }}>
         <label style={{ display: 'block', marginBottom: '5px', color: '#555' }}>
           Username:
@@ -74,12 +80,29 @@ function App() {
 
   function Home() {
     const bubbles = [
-      { src: 'https://raw.githubusercontent.com/CKBFansDAO/rock-web5-demo/refs/heads/main/assets/250316-rock-web5-luma.webp', alt: 'Bubble 1' },
-      { src: 'https://raw.githubusercontent.com/CKBFansDAO/rock-web5-demo/refs/heads/main/assets/250316-rock-web5-luma.webp', alt: 'Bubble 2' },
-      { src: 'https://raw.githubusercontent.com/CKBFansDAO/rock-web5-demo/refs/heads/main/assets/250316-rock-web5-luma.webp', alt: 'Bubble 3' },
-      { src: 'https://raw.githubusercontent.com/CKBFansDAO/rock-web5-demo/refs/heads/main/assets/250316-rock-web5-luma.webp', alt: 'Bubble 4' },
-      { src: 'https://raw.githubusercontent.com/CKBFansDAO/rock-web5-demo/refs/heads/main/assets/250316-rock-web5-luma.webp', alt: 'Bubble 5' },
+      { src: 'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/whitepaper.png', alt: 'Bubble 1' },
+      { src: 'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/whitepaper.png', alt: 'Bubble 2' },
+      { src: 'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/whitepaper.png', alt: 'Bubble 3' },
+      { src: 'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/whitepaper.png', alt: 'Bubble 4' },
+      { src: 'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/whitepaper.png', alt: 'Bubble 5' },
     ];
+
+    const imageSrc = [
+      'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/zizai.jpg',
+      'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/xiaoyao.jpg',
+      'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/yongxian.jpg',
+    ]
+
+    const imageTitle = [
+      '自在',
+      '逍遥',
+      '涌现',
+    ];
+
+    const userImages: Record<string, string> = {
+      guest: 'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/guest.png',
+      user: 'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/user.png',
+    }
 
     const navigate = useNavigate();
 
@@ -93,25 +116,26 @@ function App() {
     };
 
     return (
-      <div style={{ textAlign: 'center', padding: '20px', position: 'relative' }}>
-        <h1 style={{ marginBottom: '40px', color: '#333' }}>NanTang DAO</h1>
+      <div style={{ textAlign: 'center', padding: '20px', position: 'relative', backgroundColor: '#f0f8ff' }}>
+        <h1 style={{ marginBottom: '40px', color: '#333' }}>SeeDAO</h1>
         <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', position: 'relative', marginTop: '60px' }}>
-          {['Placeholder 1', 'Placeholder 2', 'Placeholder 3'].map((altText, index) => (
+          {['zizai', 'xiaoyao', 'yongxian'].map((altText, index) => (
             <div key={index} style={{ position: 'relative', marginTop: '40px' }}>
               <img
-                src="https://raw.githubusercontent.com/CKBFansDAO/rock-web5-demo/refs/heads/main/assets/250316-rock-web5-luma.webp"
-                alt={altText}
+                src={imageSrc[index]}
+                alt={imageTitle[index]}
                 style={{
-                  width: '150px',
+                  width: '300px',
                   height: 'auto',
                   borderRadius: '8px',
                   boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                 }}
               />
+              <p style={{ textAlign: 'center', marginTop: '10px', color: '#555', fontWeight: 'bold', fontSize: '18px' }}>{imageTitle[index]}</p>
               {bubbles.map((bubble, bubbleIndex) => {
                 const bubbleSize = currentUser === 'guest' ? 50 : Math.random() * 50 + 30;
                 const angle = (360 / bubbles.length) * bubbleIndex;
-                const radius = 120;
+                const radius = 200;
                 const x = radius * Math.cos((angle * Math.PI) / 180);
                 const y = radius * Math.sin((angle * Math.PI) / 180);
 
@@ -143,14 +167,11 @@ function App() {
           onClick={() => navigate('/profile', { state: { user: currentUser } })}
         >
           <img
-            src="https://raw.githubusercontent.com/CKBFansDAO/rock-web5-demo/refs/heads/main/assets/250316-rock-web5-luma.webp"
+            src={userImages[currentUser]}
             alt={currentUser}
             style={{
               width: '200px',
               height: 'auto',
-              borderRadius: '50%',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-              margin: '0 auto',
             }}
           />
           <p style={{ marginTop: '10px', color: '#555' }}>{currentUser}</p>
@@ -168,25 +189,45 @@ function App() {
     }
 
     const userImages: Record<string, string> = {
-      default: 'https://raw.githubusercontent.com/CKBFansDAO/rock-web5-demo/refs/heads/main/assets/250316-rock-web5-luma.webp',
-      guest: 'https://raw.githubusercontent.com/CKBFansDAO/rock-web5-demo/refs/heads/main/assets/250316-rock-web5-luma.webp',
-      user: 'https://raw.githubusercontent.com/CKBFansDAO/rock-web5-demo/refs/heads/main/assets/250316-rock-web5-luma.webp',
+      guest: 'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/guest-stat.png',
+      user: 'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/user-stat.png',
+      all: 'https://raw.githubusercontent.com/rink1969/constellar/refs/heads/main/dob/assets/all-stat.png',
     };
 
-    const userImage = userImages[user] || userImages['default'];
+    const similar: Record<string, string> = {
+      guest: '77%',
+      user: '84%',
+    }
+
+    const userImage = userImages[user];
+    const allImage = userImages['all'];
 
     return (
-      <div style={{ textAlign: 'center', padding: '20px' }}>
-      <img
+      <div style={{ textAlign: 'center', padding: '20px', backgroundColor: '#f0f8ff' }}>
+        <p style={{ textAlign: 'center', marginTop: '10px', color: '#555', fontWeight: 'bold', fontSize: '18px' }}>Profile of {user}</p>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
+          <img
         src={userImage}
         alt={user}
         style={{
-        width: '50%',
-        height: '50%',
-        borderRadius: '8px',
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+          width: '40%',
+          height: 'auto',
+          borderRadius: '8px',
+          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
         }}
-      />
+          />
+          <img
+        src={allImage}
+        alt="All Stats"
+        style={{
+          width: '40%',
+          height: 'auto',
+          borderRadius: '8px',
+          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+        }}
+          />
+        </div>
+        <p style={{ textAlign: 'center', marginTop: '20px', color: '#555', fontWeight: 'bold', fontSize: '18px' }}>您与社区的匹配度为: {similar[user]}</p>
       </div>
     );
   }
